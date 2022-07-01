@@ -1,0 +1,340 @@
+<!-----------------   Sign Up page  ----------------------------->
+<!-----------------   record store in localStorage ------------ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Sign Up</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <!-- --------------------------styling part-------------- ------->
+    <style>
+        * {
+            margin: 0px;
+            padding: opx;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 80%;
+
+        }
+
+        body {
+            background-color: #d9e4f5;
+            background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+        }
+
+        .main {
+            margin: auto;
+            display: flex;
+        }
+
+        .l-container {
+            margin: auto;
+            margin-top: 100px;
+            background-color: rgb(237, 241, 243);
+            /* opacity: 0.6; */
+            min-width: 310px;
+            width: 30%;
+            border-radius: 20px 50px 20px 50px;
+            box-shadow: 10px 20px 10px rgb(179, 172, 172);
+            justify-self: center;
+            justify-content: center;
+        }
+
+
+        .h-sign {
+            font-weight: bolder;
+            text-align: center;
+            color: brown;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-shadow: 5px 10px 10px rgb(122, 53, 53);
+
+        }
+
+        .form-container {
+            height: 60px;
+        }
+
+        .form {
+            margin: 10px;
+        }
+
+        .form-container lable {
+            font-size: 20px;
+        }
+
+
+        input:hover::placeholder {
+            color: rgb(105, 105, 121);
+            font-size: 15px;
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        input {
+            width: 99%;
+            height: 30px;
+            box-shadow: 2px 2px rgb(196, 221, 229);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        input:hover {
+            width: 100%;
+            height: 30px;
+            ;
+            box-shadow: 2px 2px rgb(48, 54, 56);
+            font-size: 20px;
+        }
+
+        input:focus {
+            width: 100%;
+            height: 30px;
+            ;
+            box-shadow: 2px 2px rgb(48, 54, 56);
+            font-size: 20px;
+        }
+
+        .r-container {
+            margin: auto;
+            margin-top: 100px;
+            margin-left: 5PX;
+            background-color: rgb(237, 241, 243);
+            /* opacity: 0.6; */
+            min-width: 310px;
+            width: 40%;
+            border-radius: 20px 50px 20px 50px;
+            box-shadow: 10px 20px 10px rgb(179, 172, 172);
+            justify-self: center;
+            justify-content: center;
+        }
+
+        .btn {
+            margin-top: 150px;
+            display: flex;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .record-btn {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+
+        button {
+            background-color: rgb(202, 211, 214);
+            width: 100px;
+            height: 40px;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 2px 4px rgb(165 165 165);
+            margin: 5px;
+            /* text-align: center; */
+        }
+
+        button:hover {
+            background-color: rgb(222 237 243);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table {
+            table-layout: fixed;
+        }
+
+        td {
+            text-align: center;
+            word-wrap: break-word;
+            inline-size: 200px;
+
+        }
+    </style>
+    <!---------------end styling part---------  -->
+</head>
+
+
+<body>
+    <div class="main">
+        <!-- --------------sign up container---------->
+        <div class="l-container">
+
+            <div class="h-sign">
+                <div>
+                    <h2>Sign Up</h2>
+                </div>
+
+            </div>
+            <div class="form">
+                <div class="form-container">
+                    <lable>Name</lable>
+                    <input id="name" type="text" placeholder="Enter your name">
+                    <lable>Email</lable>
+                    <input id="email" type="email" placeholder="Enter your email">
+                    <lable>password</lable>
+                    <input id="password" type="password" placeholder="Enter password">
+                </div>
+
+                <div class="btn"><button onclick="saveData()">Sign Up</button></div>
+                <!-- <button type="button" onclick="clearhtml()">clear</button></div> -->
+
+            </div>
+        </div>
+
+
+        <!-- ----------------user record container---------------- -->
+
+        <div class="r-container">
+
+            <div class="h-sign">
+                <div>
+                    <h2>User Records</h2>
+                </div>
+
+            </div>
+            <div class="form">
+                <table id="userData" border="1" cellspacing="0" width=100% align="center">
+
+                </table>
+                <div class="record-btn"><button id="show" onclick="showData()">Show</button>
+                    <button id="hide" onclick="hideData()"
+                        style="display: none; padding:10px 0px 0px 30px;">Hide</button>
+                    <button id="delete" onclick="deleteAll()" style="display: none;">Delete All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!---------------- ----------------Scripting Part----------------------  ----------------->
+
+    <script>
+        // showData();
+
+        // ------------save data function-----------------
+        function saveData() {
+
+            let name, email, pswd;
+            name = document.getElementById("name").value;
+            email = document.getElementById("email").value;
+            pswd = document.getElementById("password").value;
+
+            if (name === "" || email === "" || pswd === "") {
+                alert("invalid input");
+                return
+            }
+
+            let userRecord = new Array();  // creating array for storint user data
+
+
+            // ---------fetching user record-------
+            userRecord = JSON.parse(localStorage.getItem("user"))
+                ? JSON.parse(localStorage.getItem("user"))
+                : []
+
+
+            //-----checking data already exist or not
+
+            if (userRecord.some((ele) => { return ele.email === email })) {
+                alert("user already register");
+                return
+            }
+
+            //-------insert data in array----------
+            userRecord.push({
+                "name": name,
+                "email": email,
+                "pswd": pswd
+
+            })
+
+
+            //--------store data in localStorage----------
+
+            localStorage.setItem("user", JSON.stringify(userRecord))
+            showData();
+        }
+        // ---------------------------end saveData funtion--------------------------------------
+
+
+
+        //---------------------------show data function-----------------------------------------
+
+        function showData() {
+            userRecord = JSON.parse(localStorage.getItem("user"))    // fetch data of "user" key and story in array
+                ? JSON.parse(localStorage.getItem("user"))
+                : []
+
+            if (userRecord.length === 0) {
+                alert("record is empty");
+                return                                             // if record empty than return
+            }
+
+            else {                                                 // if record exist than 1st creating heading
+                let userData = document.getElementById("userData");
+                let tableData = userData.innerHTML = `<thead>
+                        <tr>
+                            <th  style="width:40px">S.No.</th>
+                             <th style="width:30%">Name</th>
+                             <th style="width:30%">Email</th>
+                             <th style="width:30%">Password</th>
+                        </tr>
+                   </thead>`;
+
+                for (let i = 0; i < userRecord.length; i++) {       // fetch array data
+
+                    tableData = userData.innerHTML;                 // now show localStorage data in table
+                    userData.innerHTML = tableData + `        
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${userRecord[i].name}</td>    
+                        <td>${userRecord[i].email}</td>    
+                        <td>${userRecord[i].pswd}</td>    
+                    </tr>`
+                }
+            }
+            document.getElementById("show").style.display = "none";
+            document.getElementById("hide").style.display = "flex";
+            document.getElementById("delete").style.display = "flex";
+
+        }
+        //--------------------------end show data funtion------------------------
+
+
+
+
+        function hideData() {
+            document.getElementById("userData").innerHTML = ``;     // basically set userData blank
+            document.getElementById("show").style.display = "flex"
+            document.getElementById("show").style.padding = "10px 0px 0px 30px"
+            document.getElementById("hide").style.display = "none";
+
+        }
+
+
+        function deleteAll() {
+            if (confirm("Are you rally want to delete")) {
+                localStorage.clear()
+                document.getElementById("userData").innerHTML = ""
+                document.getElementById("show").style.display = "flex";
+                document.getElementById("show").style.padding = "10px 0px 0px 30px"
+                document.getElementById("hide").style.display = "none";
+                document.getElementById("delete").style.display = "none";
+            }
+            showData()
+        }
+    </script>
+</body>
+
+</html>

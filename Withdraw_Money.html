@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Withdraw money</title>
+
+    <!-- -----------Css Part----------- -->
+    <style>
+        * {
+            margin: 0px;
+            padding: opx;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        body {
+            background-color: #d9e4f5;
+            background-image: linear-gradient(300deg, #d9e4f5 0%, #f5e3e6 70%);
+        }
+
+        .main {
+            margin: auto;
+        }
+
+        .l-container {
+            margin: auto;
+            margin-top: 100px;
+            background-color: rgb(237, 241, 243);
+            /* opacity: 0.6; */
+            height: 450px;
+            min-width: 310px;
+            width: 30%;
+            border-radius: 20px 50px 20px 50px;
+            box-shadow: 10px 20px 10px rgb(179, 172, 172);
+            justify-self: center;
+            justify-content: center;
+        }
+
+
+        .h-sign {
+            font-weight: bolder;
+            text-align: center;
+            color: brown;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-shadow: 5px 10px 10px rgb(122, 53, 53);
+
+        }
+
+        .form-container {
+            height: 60px;
+        }
+
+        .form {
+            margin: 10px;
+        }
+
+        .form-container lable {
+            font-size: 20px;
+        }
+
+
+        input:hover::placeholder {
+            color: rgb(105, 105, 121);
+            font-size: 15px;
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        input {
+            width: 99%;
+            height: 30px;
+            ;
+            box-shadow: 2px 2px rgb(196, 221, 229);
+            font-size: 15px;
+        }
+
+        input:hover {
+            width: 100%;
+            height: 30px;
+            ;
+            box-shadow: 2px 2px rgb(48, 54, 56);
+            font-size: 20px;
+        }
+
+        input:focus {
+            width: 100%;
+            height: 30px;
+            ;
+            box-shadow: 2px 2px rgb(48, 54, 56);
+            font-size: 20px;
+        }
+
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            height: 70px;
+
+        }
+
+        button {
+            background-color: rgb(202, 211, 214);
+            width: 100px;
+            height: 30px;
+            margin: 20px;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 2px 4px rgb(165 165 165);
+        }
+
+        button:hover {
+            background-color: rgb(222 237 243);
+            font-weight: bold;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="l-container">
+
+            <div class="h-sign">
+                <div>
+                    <h2>Withdraw Money Calculator</h2>
+                </div>
+
+            </div>
+            <div class="form">
+                <div class="form-container">
+                    <lable>Enter Your amount</lable>
+                    <input id="inputData" type="email" name="email" placeholder="Enter your amount">
+                </div>
+
+                <div class="btn"><button type="button" onclick="calculateMoney()">Calculate</button></div>
+
+                <div class="result"></div>
+                <!-- <button id="clear" style="display: none;" onclick="cleear()">clear</button> -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!---------------- ---------Scripting Part -------------------------->
+
+    <script>
+
+        function calculateMoney() {
+
+            let n = document.getElementById("inputData").value;
+            // let n = window.prompt("Enter your amount - ")
+            let n1 = n;
+            let newdiv;                             // for show data in page
+            // int maxNote
+            if (n < 50) {
+                console.log("input must be greater than or equal to 50\n\n");
+                alert("input must be greater than or equal to 50");
+            }
+            else if (n % 50 != 0) {
+                console.log("plz input amount multiply of 50\n\n");
+                alert("plz input amount multiply of 50");
+            }
+            else 
+            {
+
+                ///--------  calculate minimum note ---------------
+                let result = document.querySelector(".result");
+                newdiv = "<div>Minimum Note :</div>"
+                console.log("Min Note :");
+                if (n >= 2000) {
+                    let max2k = n / 2000;
+                    console.log("\t2000's Note = " + Math.floor(max2k));
+                    n = n % 2000;
+                    newdiv = newdiv + "<div>2000's Note = " + Math.floor(max2k) + "</div>"
+                }
+                if (n >= 500) {
+                    let max500 = n / 500;
+                    console.log("\t500's Note = " + Math.floor(max500));
+                    n = n % 500;
+                    newdiv = newdiv + "<div>500's Note =" + Math.floor(max500) + "</div>"
+                }
+                if (n >= 200) {
+                    let max200 = n / 200;
+                    console.log("\t200's Note = " + Math.floor(max200));
+                    n = n % 200;
+                    newdiv = newdiv + "<div>200's Note = " + Math.floor(max200) + "</div>"
+                }
+                if (n >= 100) {
+                    let max100 = n / 100;
+                    console.log("\t100's Note = " + Math.floor(max100));
+                    n = n % 100;
+                    newdiv = newdiv + "<div>100's Note = " + Math.floor(max100) + "</div>"
+                }
+                if (n >= 50) {
+                    let max50 = n / 50;
+                    console.log("\t50's Note = " + Math.floor(max50));
+                    n = n % 50;
+                    newdiv = newdiv + "<div>50's Note = " + Math.floor(max50) + "</div>"
+                }
+
+
+                //-----------maximum note------
+
+                newdiv = newdiv + "<div><br/>Maximum Notes :</div>"
+                let max50 = n1 / 50;
+                console.log("Maximum note : \n \t 50's note = " + Math.floor(max50));
+                console.log("\n\n");
+
+
+                //---- ------show data in page------
+
+                newdiv = newdiv + "<div>50's Note = " + Math.floor(max50) + "</div>" +
+                    "<button style='margin-left:auto;' onclick='clearData()'>clear</button>"
+                   
+                result.innerHTML = newdiv
+
+                //-------- show in alert box---
+                alert("Calculation also Show in Console")
+
+            }
+
+
+        }
+
+        function clearData() {
+            document.querySelector(".result").innerHTML = "";
+        }
+
+    </script>
+</body>
+
+</html>
